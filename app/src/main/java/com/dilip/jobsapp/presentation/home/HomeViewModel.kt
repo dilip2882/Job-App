@@ -1,12 +1,9 @@
 package com.dilip.jobsapp.presentation.home
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dilip.jobsapp.State
-import com.dilip.jobsapp.data.model.Result
 import com.dilip.jobsapp.data.response.JobsResponse
-import com.dilip.jobsapp.data.response.PrimaryDetails
 import com.dilip.jobsapp.domain.usecase.GetJobsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job

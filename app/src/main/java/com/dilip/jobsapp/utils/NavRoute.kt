@@ -6,16 +6,19 @@ import java.net.URLDecoder
 import java.net.URLEncoder
 
 object NavRoute {
-    fun createJobsDetailsRoute(news: Result, isLocal: Boolean? = false): String {
-        val encodedUrl = URLEncoder.encode(news.custom_link, "utf-8")
-        val tempNews = news.copy(custom_link = encodedUrl)
-        val gson = Gson().toJson(tempNews)
-        return "/details/news=$gson&isLocal=$isLocal"
+    fun createJobsDetailsRoute(
+        jobs: Result,
+        isLocal: Boolean? = false
+    ): String {
+        val encodedUrl = URLEncoder.encode(jobs.custom_link, "utf-8")
+        val tempJobs = jobs.copy(custom_link = encodedUrl)
+        val gson = Gson().toJson(tempJobs)
+        return "/details/jobs=$gson&isLocal=$isLocal"
     }
 
     fun getJobsFromRoute(json: String): Result {
-        val news = Gson().fromJson(json, Result::class.java)
-        val decodeUrl = URLDecoder.decode(news.id.toString(), "utf-8")
-        return news.copy(custom_link = decodeUrl)
+        val jobs = Gson().fromJson(json, Result::class.java)
+        val decodeUrl = URLDecoder.decode(jobs.custom_link, "utf-8")
+        return jobs.copy(custom_link = decodeUrl)
     }
 }

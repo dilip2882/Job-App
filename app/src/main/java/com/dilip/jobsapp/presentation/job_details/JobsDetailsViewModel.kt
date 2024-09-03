@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dilip.jobsapp.State
 import com.dilip.jobsapp.data.model.Result
+import com.dilip.jobsapp.database.JobsDatabase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -12,17 +13,17 @@ import javax.inject.Inject
 
 @HiltViewModel
 class JobsDetailsViewModel @Inject constructor(
-//    database: JobsDatabase
+    database: JobsDatabase
 ) : ViewModel() {
     private val _state = MutableStateFlow<State<BookmarkAction>>(State.Loading)
     val state = _state as StateFlow<State<BookmarkAction>>
 
-//    private val jobsDao = database.jobsDao()
-    fun addJobs(jobs: Result) {
+    private val jobsDao = database.jobsDao()
+    fun addJobs(jobs: com.dilip.jobsapp.data.model.Result) {
         viewModelScope.launch {
             try {
                 _state.tryEmit(State.Loading)
-//                jobsDao.addJobs(jobs)
+                jobsDao.addJobs(jobs)
                 _state.tryEmit(State.Success(BookmarkAction.ADD))
             } catch (e: Exception) {
                 _state.tryEmit(State.Error(e.message.toString()))
@@ -34,7 +35,7 @@ class JobsDetailsViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 _state.tryEmit(State.Loading)
-//                jobsDao.deleteJobs(jobs)
+                jobsDao.deleteJobs(jobs)
                 _state.tryEmit(State.Success(BookmarkAction.REMOVE))
             } catch (e: Exception) {
                 _state.tryEmit(State.Error(e.message.toString()))

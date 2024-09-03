@@ -37,6 +37,7 @@ import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.dilip.jobsapp.State
 import com.dilip.jobsapp.data.model.Result
+import com.dilip.jobsapp.utils.NavRoute
 
 @Composable
 fun HomeScreen(navController: NavHostController) {
@@ -87,8 +88,9 @@ fun HomeScreen(navController: NavHostController) {
 
             else -> {
                 val data = (uiState.value as State.Success).data
-                NewsListView(news = data.results) {
-//                    navController.navigate(NavRoute.createNewsDetailsRoute(it))
+                JobsListView(news = data.results) {
+//                    navController.navigate(NavRoute.createJobsDetailsRoute(it))
+
                 }
             }
         }
@@ -96,7 +98,10 @@ fun HomeScreen(navController: NavHostController) {
 }
 
 @Composable
-fun NewsListView(news: List<Result>, onClick: (Result) -> Unit) {
+fun JobsListView(
+    news: List<Result>,
+    onClick: (Result) -> Unit
+) {
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         item {
             Text(text = "Jobs")

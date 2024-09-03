@@ -28,6 +28,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.dilip.jobsapp.presentation.bookmarks.BookmarkScreen
 import com.dilip.jobsapp.presentation.home.HomeScreen
 import com.dilip.jobsapp.presentation.job_details.JobsDetailsScreen
 import com.dilip.jobsapp.ui.theme.JobsAppTheme
@@ -89,7 +90,7 @@ class MainActivity : ComponentActivity() {
                                 HomeScreen(navController = navController)
                                 isBottomBarVisible.value = true
                             }
-                            composable("/details/news={news}&isLocal={isLocal}") {
+                            composable("/details/jobs={jobs}&isLocal={isLocal}") {
                                 val newsJson = it.arguments?.getString("jobs")
                                 val isLocal = it.arguments?.getString("isLocal").toBoolean()
                                 val jobs = NavRoute.getJobsFromRoute(newsJson!!)
@@ -100,7 +101,10 @@ class MainActivity : ComponentActivity() {
                                 )
                                 isBottomBarVisible.value = false
                             }
-
+                            composable(NavScreen.Bookmarks.route) {
+                                BookmarkScreen(navController)
+                                isBottomBarVisible.value = true
+                            }
 
                         }
                     }
