@@ -89,7 +89,7 @@ fun HomeScreen(navController: NavHostController) {
             else -> {
                 val data = (uiState.value as State.Success).data
                 JobsListView(news = data.results) {
-//                    navController.navigate(NavRoute.createJobsDetailsRoute(it))
+                    navController.navigate(NavRoute.createJobsDetailsRoute(it))
 
                 }
             }
